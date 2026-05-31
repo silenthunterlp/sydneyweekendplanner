@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sydney Weekend Planner</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>🌊 Sydney Weekend Planner</h1>
+      <p class="subtitle">Your AI guide to the perfect Sydney weekend</p>
+    </header>
+
+    <div id="chat-container">
+      <div id="messages"></div>
+      <div id="input-area">
+        <textarea
+          id="user-input"
+          placeholder="Ask me to plan your Sydney weekend..."
+          rows="2"
+          autofocus
+        ></textarea>
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+  <script src="/static/chat.js"></script>
+</body>
+</html>
