@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "sydney-planner",
+      "runtimeExecutable": "C:\\Users\\saram\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "runtimeArgs": ["scripts\\run_dev.py"],
+      "port": 8000
+    }
+  ]
+}

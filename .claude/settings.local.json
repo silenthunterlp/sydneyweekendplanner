@@ -8,7 +8,10 @@
       "PowerShell(Get-Command python3, py, python3.11, python3.12 -ErrorAction SilentlyContinue)",
       "PowerShell($pyexe = \"C:\\\\Users\\\\saram\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe\"; & $pyexe --version)",
       "Bash(git commit -m ' *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git remote *)",
+      "Bash(git push *)"
     ]
   }
 }
