@@ -119,6 +119,8 @@
     setInputEnabled(false);
     showThinking();
     ws.send(text);
+    // Hide suggestion chips after first message is sent
+    if (chipBar) chipBar.style.display = "none";
   }
 
   sendBtn.addEventListener("click", send);

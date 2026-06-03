@@ -22,7 +22,7 @@ body {
 header {
   background: linear-gradient(135deg, #0057b8, #00b4d8);
   color: white;
-  padding: 16px 20px;
+  padding: 10px 16px;
   flex-shrink: 0;
 }
 
@@ -32,8 +32,8 @@ header {
   justify-content: space-between;
 }
 
-header h1 { font-size: 1.3rem; font-weight: 700; }
-header .subtitle { font-size: 0.8rem; opacity: 0.85; margin-top: 3px; }
+header h1 { font-size: 1.05rem; font-weight: 700; }
+header .subtitle { font-size: 0.75rem; opacity: 0.85; margin-top: 1px; }
 
 /* ── Status indicator ── */
 .status-bar { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; opacity: 0.9; }
@@ -136,6 +136,7 @@ header .subtitle { font-size: 0.8rem; opacity: 0.85; margin-top: 3px; }
   flex-wrap: wrap;
   gap: 8px;
   padding: 6px 16px 4px;
+  flex-shrink: 0;
 }
 
 .chip {
@@ -156,6 +157,7 @@ header .subtitle { font-size: 0.8rem; opacity: 0.85; margin-top: 3px; }
   gap: 8px;
   padding: 10px 16px 4px;
   border-top: 1px solid #e2e8f0;
+  flex-shrink: 0;
 }
 
 #user-input {
@@ -192,6 +194,7 @@ header .subtitle { font-size: 0.8rem; opacity: 0.85; margin-top: 3px; }
   font-size: 0.72rem;
   color: #94a3b8;
   padding: 4px 0 10px;
+  flex-shrink: 0;
 }
 kbd {
   background: #f1f5f9; border: 1px solid #cbd5e1;

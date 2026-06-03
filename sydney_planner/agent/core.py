@@ -52,9 +52,20 @@ class PlannerAgent:
         except anthropic.AuthenticationError:
             logger.error("Anthropic authentication failed — check ANTHROPIC_API_KEY in .env")
             return (
-                "⚠️ The agent isn't configured yet — the API key is missing or invalid. "
-                "Please contact the administrator."
+                "⚠️ The API key is invalid or expired. "
+                "Please check ANTHROPIC_API_KEY in .env and restart the server."
             )
+        except anthropic.BadRequestError as exc:
+            msg = str(exc)
+            if "credit balance is too low" in msg or "billing" in msg.lower():
+                logger.error("Anthropic billing error: %s", msg)
+                return (
+                    "⚠️ Your Anthropic account has insufficient credits.\n\n"
+                    "Please add credits at: https://console.anthropic.com/settings/billing\n\n"
+                    "Once topped up, you're all set — no restart needed!"
+                )
+            logger.error("Anthropic bad request: %s", msg)
+            return "I received an invalid request error. Please try rephrasing your message."
         except anthropic.RateLimitError:
             logger.warning("Anthropic rate limit hit for user %s", user_id)
             return (
