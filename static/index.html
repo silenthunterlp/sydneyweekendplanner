@@ -9,21 +9,33 @@
 <body>
   <div id="app">
     <header>
-      <h1>🌊 Sydney Weekend Planner</h1>
-      <p class="subtitle">Your AI guide to the perfect Sydney weekend</p>
+      <div class="header-content">
+        <div>
+          <h1>🌊 Sydney Weekend Planner</h1>
+          <p class="subtitle">Your AI guide to the perfect Sydney weekend</p>
+        </div>
+        <div class="status-bar">
+          <span id="status-dot" class="status-dot connecting"></span>
+          <span id="status-text" class="status-text">Connecting…</span>
+        </div>
+      </div>
     </header>
 
     <div id="chat-container">
       <div id="messages"></div>
+
+      <div id="suggestion-chips"></div>
+
       <div id="input-area">
         <textarea
           id="user-input"
-          placeholder="Ask me to plan your Sydney weekend..."
+          placeholder="Ask me to plan your Sydney weekend…"
           rows="2"
           autofocus
         ></textarea>
-        <button id="send-btn">Send</button>
+        <button id="send-btn">Send ↑</button>
       </div>
+      <p class="hint">Press <kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> for new line</p>
     </div>
   </div>
   <script src="/static/chat.js"></script>
