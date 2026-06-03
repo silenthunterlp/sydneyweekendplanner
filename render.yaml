@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: sydney-weekend-planner
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false          # set manually in Render dashboard
+      - key: CLAUDE_MODEL
+        value: claude-sonnet-4-6
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./sydney_planner.db
+      - key: PYTHON_VERSION
+        value: "3.12"
+      # Optional — set in dashboard to enable channels
+      # - key: TWILIO_ACCOUNT_SID
+      # - key: TWILIO_AUTH_TOKEN
+      # - key: TWILIO_WHATSAPP_FROM
+      # - key: TELEGRAM_BOT_TOKEN
+      # - key: EVENTBRITE_API_KEY
+      # - key: TFNSW_API_KEY

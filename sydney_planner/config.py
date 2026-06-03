@@ -29,11 +29,17 @@ class Settings(BaseSettings):
     # Database
     database_url: str = "sqlite+aiosqlite:///./sydney_planner.db"
 
-    # App
+    # App — Render sets PORT automatically; WEB_PORT is the local override
     web_host: str = "0.0.0.0"
-    web_port: int = 8000
+    web_port: int = 8000          # overridden by PORT env var on Render
+    port: int = 0                 # Render's PORT — 0 means "not set"
     debug: bool = False
     sydney_timezone: str = "Australia/Sydney"
+
+    @property
+    def effective_port(self) -> int:
+        """Use Render's PORT if set, otherwise WEB_PORT."""
+        return self.port if self.port else self.web_port
 
 
 @lru_cache
