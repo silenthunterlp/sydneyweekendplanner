@@ -117,7 +117,9 @@ async def lifespan(app: FastAPI):
     if _is_configured(settings.telegram_bot_token, "..."):
         from sydney_planner.channels.telegram import build_telegram_app
         tg_app = build_telegram_app(settings.telegram_bot_token, agent)
-        asyncio.create_task(tg_app.run_polling())
+        await tg_app.initialize()
+        await tg_app.start()
+        await tg_app.updater.start_polling(drop_pending_updates=True)
         logger.info("Telegram bot polling started")
 
     logger.info("Sydney Weekend Planner ready")
