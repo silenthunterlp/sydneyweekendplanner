@@ -79,7 +79,16 @@ async def lifespan(app: FastAPI):
 
     @app.get("/health")
     async def health():
-        api_ok = _is_configured(settings.anthropic_api_key, "sk-ant-...")
+        # Re-read settings fresh (bypass lru_cache for diagnostics)
+        import os
+        tg_token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+        api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+        twilio_sid = os.environ.get("TWILIO_ACCOUNT_SID", "")
+
+        api_ok = bool(api_key and len(api_key) > 20)
+        tg_ok = bool(tg_token and len(tg_token) > 10)
+        wa_ok = bool(twilio_sid and twilio_sid != "AC..." and len(twilio_sid) > 10)
+
         return JSONResponse(
             status_code=200 if api_ok else 503,
             content={
@@ -88,9 +97,13 @@ async def lifespan(app: FastAPI):
                 "anthropic_api_key": "configured" if api_ok else "missing",
                 "channels": {
                     "web": "active",
-                    "whatsapp": "active" if _is_configured(settings.twilio_account_sid, "AC...") else "not configured",
-                    "telegram": "active" if _is_configured(settings.telegram_bot_token, "...") else "not configured",
+                    "whatsapp": "active" if wa_ok else "not configured",
+                    "telegram": "active" if tg_ok else "not configured",
                 },
+                "debug": {
+                    "telegram_token_length": len(tg_token),
+                    "telegram_token_preview": tg_token[:8] + "..." if tg_token else "empty",
+                }
             },
         )
 
