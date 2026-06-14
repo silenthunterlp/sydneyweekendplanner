@@ -77,6 +77,13 @@ async def lifespan(app: FastAPI):
     async def index():
         return FileResponse(str(STATIC_DIR / "index.html"))
 
+    # Serve chat.js directly from Python to ensure wss:// fix is always deployed
+    @app.get("/static/chat.js")
+    async def chat_js():
+        from fastapi.responses import Response
+        js = (STATIC_DIR / "chat.js").read_text(encoding="utf-8")
+        return Response(content=js, media_type="application/javascript")
+
     @app.get("/health")
     async def health():
         # Re-read settings fresh (bypass lru_cache for diagnostics)
