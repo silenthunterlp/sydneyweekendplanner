@@ -12,7 +12,9 @@
     sessionStorage.setItem("sydney_session_id", sessionId);
   }
 
-  const wsUrl = `ws://${location.host}/ws/${sessionId}`;
+  // Use wss:// on HTTPS (Render/production), ws:// on HTTP (local dev)
+  const wsProtocol = location.protocol === "https:" ? "wss:" : "ws:";
+  const wsUrl = `${wsProtocol}//${location.host}/ws/${sessionId}`;
   let ws;
   let reconnectTimer;
 
