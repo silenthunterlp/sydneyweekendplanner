@@ -122,8 +122,8 @@ async def lifespan(app: FastAPI):
         try:
             while True:
                 message = await websocket.receive_text()
-                if not message.strip():
-                    continue
+                if not message.strip() or message == "__ping__":
+                    continue  # ignore empty messages and keep-alive pings
                 reply = await agent.chat(user_id, message, "web")
                 await websocket.send_text(reply)
         except WebSocketDisconnect:

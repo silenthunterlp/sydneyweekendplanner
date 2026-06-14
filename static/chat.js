@@ -17,6 +17,7 @@
   const wsUrl = `${wsProtocol}//${location.host}/ws/${sessionId}`;
   let ws;
   let reconnectTimer;
+  let pingTimer;
 
   function setStatus(state) {
     // state: "connecting" | "connected" | "disconnected"
@@ -37,6 +38,11 @@
       setStatus("connected");
       appendMessage("assistant", "G'day! 🌊 I'm your Sydney Weekend Planner.\n\nAsk me to plan your weekend, or say what you're in the mood for!");
       setInputEnabled(true);
+      // Keep-alive ping every 30s to prevent Render's proxy from closing idle connections
+      clearInterval(pingTimer);
+      pingTimer = setInterval(() => {
+        if (ws && ws.readyState === WebSocket.OPEN) ws.send("__ping__");
+      }, 30000);
     };
 
     ws.onmessage = (event) => {
